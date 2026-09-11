@@ -1,0 +1,45 @@
+name: Trends Monitor Scheduler
+
+on:
+  schedule:
+    - cron: "0 6 * * *"          # morning — tweets + article drafts
+    - cron: "0 12,18,22 * * *"   # standard — tweets only
+  workflow_dispatch:
+    inputs:
+      run_type:
+        description: 'morning = tweets + articles; standard = tweets only'
+        required: false
+        default: 'morning'
+        type: choice
+        options: [morning, standard]
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - run: pip install -r requirements.txt
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Run trends monitor
+        run: python src/main.py
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          RUN_TYPE: ${{ github.event_name == 'workflow_dispatch' && inputs.run_type || (github.event.schedule == '0 6 * * *' && 'morning' || 'standard') }}
