@@ -169,14 +169,19 @@ Each draft includes title, date, source trends in the frontmatter, and ~600 word
 
 ## 🗺️ Roadmap
 
-- [ ] Trend filtering — stop-word list to skip irrelevant topics
-- [ ] LinkedIn post format — separate, longer-form prompt
-- [ ] Weekly digest — top 10 trends of the week (Sunday 08:00 UTC)
-- [ ] Twitter/X auto-post via API v2 (`tweepy`)
-- [ ] Keyword alerts — instant email when a custom keyword hits trends
-- [ ] Blog platform integration — Ghost / Hashnode / WordPress API
-- [ ] DALL·E cover image prompt generation for articles
-- [ ] RSS feed auto-generated from article drafts
+**v0.2 — Configurable sources**
+Add data sources beyond Google Trends: Reddit API, Hacker News, Arxiv. Each source configurable per market in `config.py`.
+
+**v0.3 — Extended output formats**
+LinkedIn post format (longer-form, different tone), weekly digest (top 10 trends, Sunday 08:00 UTC), keyword alerts (instant email when a watched keyword enters trends).
+
+**v0.4 — Dashboard UI**
+Static HTML dashboard auto-generated from `drafts/` — trend history charts, market comparison, hosted on GitHub Pages alongside the repo.
+
+**v1.0 — Self-hostable**
+Docker image + single `config.yaml` replacing environment variables. Run without GitHub Actions on any server. RSS feed auto-generated from article drafts.
+
+Pending (no milestone assigned): Twitter/X auto-post via `tweepy`, blog platform push (Ghost / Hashnode / WordPress), DALL·E cover image generation for articles, trend deduplication stop-word list.
 
 ---
 
