@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>trends-monitor — Automated AI trend tracking</title>
+  <meta name="description" content="Google Trends + GPT-4 + GitHub Actions. Daily AI-powered summaries delivered to your inbox for $0.04/month." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0D0F12;
+      color: #E8EAF0;
+      font-family: 'Inter', system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .container { max-width: 600px; width: 100%; }
+    .label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: #4FFFB0;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: #E8EAF0;
+      margin-bottom: 0.5rem;
+    }
+    .subtitle {
+      font-size: 0.95rem;
+      color: #6B7280;
+      margin-bottom: 0.75rem;
+    }
+    .tagline {
+      font-size: 1rem;
+      color: #A0AEC0;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+    pre {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      background: #161A20;
+      border: 1px solid #2D3748;
+      border-radius: 10px;
+      padding: 1.5rem;
+      color: #A8B2C8;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      overflow-x: auto;
+    }
+    pre .prompt { color: #4FFFB0; }
+    pre .acc    { color: #4FFFB0; }
+    pre .dim    { color: #4B5563; }
+    .features {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    .feature {
+      background: #161A20;
+      border: 1px solid #232830;
+      border-radius: 6px;
+      padding: 0.6rem 0.9rem;
+      font-size: 0.85rem;
+      color: #A0AEC0;
+      display: flex;
+      gap: 0.75rem;
+    }
+    .feature-icon { color: #4FFFB0; flex-shrink: 0; }
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .links a {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: #4FFFB0;
+      text-decoration: none;
+    }
+    .links a:hover { text-decoration: underline; }
+    .footer {
+      font-size: 0.78rem;
+      color: #6B7280;
+      border-top: 1px solid #1E2330;
+      padding-top: 1.25rem;
+    }
+    .footer a { color: #4FFFB0; text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <p class="label">pawellach / trends-monitor</p>
+    <h1>trends-monitor</h1>
+    <p class="subtitle">Automated AI trend tracking · GPT-4 + GitHub Actions</p>
+    <p class="tagline">Google Trends data, 4× daily. AI-generated tweets and blog drafts. Delivered to your inbox for under $0.04/month. No server.</p>
+
+    <pre><span class="prompt">></span> how it works
+
+<span class="acc">GitHub Actions (cron 4×/day)</span>
+  <span class="dim">↓</span>
+<span class="acc">google_trends.py</span>  <span class="dim">──► pytrends API (PL + US)</span>
+  <span class="dim">↓</span>
+<span class="acc">deduplicator.py</span>  <span class="dim">──► 24h seen_trends.json</span>
+  <span class="dim">↓</span>
+<span class="acc">generator.py</span>     <span class="dim">──► gpt-4.1-nano tweets</span>
+<span class="acc">article_gen.py</span>   <span class="dim">──► gpt-4.1-mini blog drafts  (morning only)</span>
+  <span class="dim">↓</span>
+<span class="acc">mailer.py</span>        <span class="dim">──► HTML email digest</span>
+<span class="acc">publisher.py</span>     <span class="dim">──► auto-commit drafts/ to repo</span></pre>
+
+    <div class="features">
+      <div class="feature"><span class="feature-icon">↻</span> Google Trends refreshed 4× daily — Poland &amp; USA</div>
+      <div class="feature"><span class="feature-icon">✦</span> GPT-4.1-nano tweets per trend · GPT-4.1-mini daily article drafts</div>
+      <div class="feature"><span class="feature-icon">◎</span> Smart 24h deduplication — each trend appears once per day</div>
+      <div class="feature"><span class="feature-icon">⌗</span> Zero-config markets — add a country in one line of config.py</div>
+      <div class="feature"><span class="feature-icon">$</span> Under $0.04/month in API costs</div>
+    </div>
+
+    <div class="links">
+      <a href="https://github.com/pawellach/trends-monitor" target="_blank" rel="noopener">GitHub →</a>
+      <a href="https://pawellach.github.io" target="_blank" rel="noopener">pawellach.github.io</a>
+    </div>
+
+    <p class="footer">
+      Built by <a href="https://github.com/pawellach" target="_blank" rel="noopener">Paweł Lach</a>
+      &nbsp;·&nbsp; MIT License
+    </p>
+  </div>
+</body>
+</html>

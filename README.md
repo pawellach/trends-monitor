@@ -191,7 +191,7 @@ Each draft includes title, date, source trends in the frontmatter, and ~600 word
 
 ## 📄 License
 
-MIT © [Paweł Łach](https://github.com/pawellach)
+MIT © [Paweł Lach](https://github.com/pawellach)
 
 ---
 
